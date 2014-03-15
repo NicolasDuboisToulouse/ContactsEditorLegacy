@@ -1,0 +1,3 @@
+<resources>
+ <bool name="config_editor_field_order_primary">true</bool>
+</resources>

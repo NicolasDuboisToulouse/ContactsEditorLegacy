@@ -16,7 +16,7 @@
 
 package com.android.contacts.model;
 
-import com.android.contacts.R;
+import com.snoopy.contacts.editor.R;
 import com.google.android.collect.Lists;
 
 import android.content.ContentValues;
