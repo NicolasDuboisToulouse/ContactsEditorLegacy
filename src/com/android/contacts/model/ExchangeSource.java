@@ -16,7 +16,7 @@
 
 package com.android.contacts.model;
 
-import com.android.contacts.R;
+import com.snoopy.contacts.editor.R;
 import com.google.android.collect.Lists;
 
 import android.content.ContentValues;
@@ -66,40 +66,24 @@ public class ExchangeSource extends FallbackSource {
         final DataKind kind = super.inflateStructuredName(context, ContactsSource.LEVEL_MIMETYPES);
 
         if (inflateLevel >= ContactsSource.LEVEL_CONSTRAINTS) {
-            boolean displayOrderPrimary =
-                    context.getResources().getBoolean(R.bool.config_editor_field_order_primary);
             kind.typeOverallMax = 1;
 
             kind.fieldList = Lists.newArrayList();
             kind.fieldList.add(new EditField(StructuredName.PREFIX, R.string.name_prefix,
-                    FLAGS_PERSON_NAME).setOptional(true));
-            if (!displayOrderPrimary) {
-                kind.fieldList.add(new EditField(StructuredName.FAMILY_NAME,
-                        R.string.name_family, FLAGS_PERSON_NAME));
-                kind.fieldList.add(new EditField(StructuredName.MIDDLE_NAME,
-                        R.string.name_middle, FLAGS_PERSON_NAME).setOptional(true));
-                kind.fieldList.add(new EditField(StructuredName.GIVEN_NAME,
-                        R.string.name_given, FLAGS_PERSON_NAME));
-                kind.fieldList.add(new EditField(StructuredName.SUFFIX,
-                        R.string.name_suffix, FLAGS_PERSON_NAME).setOptional(true));
-                kind.fieldList.add(new EditField(StructuredName.PHONETIC_FAMILY_NAME,
-                        R.string.name_phonetic_family, FLAGS_PHONETIC).setOptional(true));
-                kind.fieldList.add(new EditField(StructuredName.PHONETIC_GIVEN_NAME,
-                        R.string.name_phonetic_given, FLAGS_PHONETIC).setOptional(true));
-            } else {
-                kind.fieldList.add(new EditField(StructuredName.GIVEN_NAME,
-                        R.string.name_given, FLAGS_PERSON_NAME));
-                kind.fieldList.add(new EditField(StructuredName.MIDDLE_NAME,
-                        R.string.name_middle, FLAGS_PERSON_NAME).setOptional(true));
-                kind.fieldList.add(new EditField(StructuredName.FAMILY_NAME,
-                        R.string.name_family, FLAGS_PERSON_NAME));
-                kind.fieldList.add(new EditField(StructuredName.SUFFIX,
-                        R.string.name_suffix, FLAGS_PERSON_NAME).setOptional(true));
-                kind.fieldList.add(new EditField(StructuredName.PHONETIC_GIVEN_NAME,
-                        R.string.name_phonetic_given, FLAGS_PHONETIC).setOptional(true));
-                kind.fieldList.add(new EditField(StructuredName.PHONETIC_FAMILY_NAME,
-                        R.string.name_phonetic_family, FLAGS_PHONETIC).setOptional(true));
-            }
+            		FLAGS_PERSON_NAME).setOptional(true));
+            kind.fieldList.add(new EditField(StructuredName.GIVEN_NAME,
+            		R.string.name_given, FLAGS_PERSON_NAME));
+            kind.fieldList.add(new EditField(StructuredName.MIDDLE_NAME,
+            		R.string.name_middle, FLAGS_PERSON_NAME).setOptional(true));
+            kind.fieldList.add(new EditField(StructuredName.FAMILY_NAME,
+            		R.string.name_family, FLAGS_PERSON_NAME));
+            kind.fieldList.add(new EditField(StructuredName.SUFFIX,
+            		R.string.name_suffix, FLAGS_PERSON_NAME).setOptional(true));
+            kind.fieldList.add(new EditField(StructuredName.PHONETIC_GIVEN_NAME,
+            		R.string.name_phonetic_given, FLAGS_PHONETIC).setOptional(true));
+            kind.fieldList.add(new EditField(StructuredName.PHONETIC_FAMILY_NAME,
+            		R.string.name_phonetic_family, FLAGS_PHONETIC).setOptional(true));
+
         }
 
         return kind;
