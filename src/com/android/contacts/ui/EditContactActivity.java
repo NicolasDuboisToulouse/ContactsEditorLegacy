@@ -16,7 +16,6 @@
 
 package com.android.contacts.ui;
 
-import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.model.ContactsSource;
 import com.android.contacts.model.Editor;
@@ -239,7 +238,7 @@ public final class EditContactActivity extends Activity
                     mSelection = RawContacts.CONTACT_ID + "=" + contactId;
                 } else if (RawContacts.CONTENT_ITEM_TYPE.equals(mimeType)) {
                     final long rawContactId = ContentUris.parseId(data);
-                    final long contactId = ContactsUtils.queryForContactId(resolver, rawContactId);
+                    final long contactId = queryForContactId(resolver, rawContactId);
                     mSelection = RawContacts.CONTACT_ID + "=" + contactId;
                 }
             } else if (android.provider.Contacts.AUTHORITY.equals(authority)) {
@@ -1433,4 +1432,23 @@ public final class EditContactActivity extends Activity
         	Toast.makeText(getApplicationContext(), "[EDITOR BACKPORT] Unsuported search", Toast.LENGTH_LONG).show();
           }
     }
+    
+    public static long queryForContactId(ContentResolver cr, long rawContactId) {
+        Cursor contactIdCursor = null;
+        long contactId = -1;
+        try {
+            contactIdCursor = cr.query(RawContacts.CONTENT_URI,
+                    new String[] {RawContacts.CONTACT_ID},
+                    RawContacts._ID + "=" + rawContactId, null, null);
+            if (contactIdCursor != null && contactIdCursor.moveToFirst()) {
+                contactId = contactIdCursor.getLong(0);
+            }
+        } finally {
+            if (contactIdCursor != null) {
+                contactIdCursor.close();
+            }
+        }
+        return contactId;
+    }
+
 }
