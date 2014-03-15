@@ -28,12 +28,10 @@ import android.accounts.OnAccountsUpdateListener;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.IContentService;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SyncAdapterType;
 import android.content.pm.PackageManager;
-import android.os.RemoteException;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
@@ -42,7 +40,6 @@ import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 
 /**
  * Singleton holder for all parsed {@link ContactsSource} available on the
@@ -187,10 +184,9 @@ public class Sources extends BroadcastReceiver implements OnAccountsUpdateListen
         mKnownPackages.clear();
 
         final AccountManager am = mAccountManager;
-        final IContentService cs = ContentResolver.getContentService();
 
         try {
-            final SyncAdapterType[] syncs = cs.getSyncAdapterTypes();
+            final SyncAdapterType[] syncs = ContentResolver.getSyncAdapterTypes();
             final AuthenticatorDescription[] auths = am.getAuthenticatorTypes();
 
             for (SyncAdapterType sync : syncs) {
@@ -223,7 +219,7 @@ public class Sources extends BroadcastReceiver implements OnAccountsUpdateListen
 
                 addSource(source);
             }
-        } catch (RemoteException e) {
+        } catch (RuntimeException e) {
             Log.w(TAG, "Problem loading accounts: " + e.toString());
         }
     }
