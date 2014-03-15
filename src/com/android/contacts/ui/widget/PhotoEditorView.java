@@ -16,7 +16,7 @@
 
 package com.android.contacts.ui.widget;
 
-import com.android.contacts.R;
+import com.snoopy.contacts.editor.R;
 import com.android.contacts.model.EntityDelta;
 import com.android.contacts.model.ContactsSource.DataKind;
 import com.android.contacts.model.EntityDelta.ValuesDelta;

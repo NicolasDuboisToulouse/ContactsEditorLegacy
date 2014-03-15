@@ -17,7 +17,7 @@
 package com.android.contacts.ui.widget;
 
 import com.android.contacts.ContactsUtils;
-import com.android.contacts.R;
+import com.snoopy.contacts.editor.R;
 import com.android.contacts.model.Editor;
 import com.android.contacts.model.EntityDelta;
 import com.android.contacts.model.EntityModifier;
@@ -284,11 +284,11 @@ public class GenericEditorView extends RelativeLayout implements Editor, View.On
      * no empty text is allowed in any custom label.
      */
     private Dialog createCustomDialog() {
-        final EditText customType = new EditText(mContext);
+        final EditText customType = new EditText(getContext());
         customType.setInputType(INPUT_TYPE_CUSTOM);
         customType.requestFocus();
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(R.string.customLabelPickerTitle);
         builder.setView(customType);
 
@@ -323,11 +323,11 @@ public class GenericEditorView extends RelativeLayout implements Editor, View.On
         final List<EditType> validTypes = EntityModifier.getValidTypes(mState, mKind, mType);
 
         // Wrap our context to inflate list items using correct theme
-        final Context dialogContext = new ContextThemeWrapper(mContext,
+        final Context dialogContext = new ContextThemeWrapper(getContext(),
                 android.R.style.Theme_Light);
         final LayoutInflater dialogInflater = mInflater.cloneInContext(dialogContext);
 
-        final ListAdapter typeAdapter = new ArrayAdapter<EditType>(mContext, RES_LABEL_ITEM,
+        final ListAdapter typeAdapter = new ArrayAdapter<EditType>(getContext(), RES_LABEL_ITEM,
                 validTypes) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -366,7 +366,7 @@ public class GenericEditorView extends RelativeLayout implements Editor, View.On
             }
         };
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(R.string.selectLabel);
         builder.setSingleChoiceItems(typeAdapter, 0, clickListener);
         return builder.create();
@@ -374,32 +374,24 @@ public class GenericEditorView extends RelativeLayout implements Editor, View.On
 
     /** {@inheritDoc} */
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.edit_label: {
-                createLabelDialog().show();
-                break;
-            }
-            case R.id.edit_delete: {
-                // Keep around in model, but mark as deleted
-                mEntry.markDeleted();
-
-                // Remove editor from parent view
-                final ViewGroup parent = (ViewGroup)getParent();
-                parent.removeView(this);
-
-                if (mListener != null) {
-                    // Notify listener when present
-                    mListener.onDeleted(this);
-                }
-                break;
-            }
-            case R.id.edit_more:
-            case R.id.edit_less: {
-                mHideOptional = !mHideOptional;
-                rebuildValues();
-                break;
-            }
-        }
+        int id = v.getId();
+		if (id == R.id.edit_label) {
+			createLabelDialog().show();
+		} else if (id == R.id.edit_delete) {
+			// Keep around in model, but mark as deleted
+			mEntry.markDeleted();
+			// Remove editor from parent view
+			final ViewGroup parent = (ViewGroup)getParent();
+			parent.removeView(this);
+			if (mListener != null) {
+			    // Notify listener when present
+			    mListener.onDeleted(this);
+			}
+		} else if (id == R.id.edit_more
+				|| id == R.id.edit_less) {
+			mHideOptional = !mHideOptional;
+			rebuildValues();
+		}
     }
 
     private static class SavedState extends BaseSavedState {

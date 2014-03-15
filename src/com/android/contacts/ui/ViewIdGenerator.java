@@ -20,7 +20,6 @@ import com.android.contacts.model.EntityDelta;
 import com.android.contacts.model.ContactsSource.DataKind;
 import com.android.contacts.model.EntityDelta.ValuesDelta;
 import com.android.contacts.ui.widget.GenericEditorView;
-import com.android.contacts.ui.widget.KindSectionView;
 
 import android.os.Bundle;
 import android.os.Parcel;

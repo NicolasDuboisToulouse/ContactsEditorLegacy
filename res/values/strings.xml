@@ -65,5 +65,12 @@
         into multiple contacts: one for each set of contact information that was joined into it?
     </string>
     <string name="dialog_new_contact_account">Create contact under account</string>
+    <!-- String used to display calls from unknown numbers in the call log -->
+    <string name="unknown">Unknown</string>
+    <!-- Title of the dialog used to set a custom label for a contact detail, like a phone number or email address.
+         For example, this may be used to set a phone number's label to "Vaction house" -->
+    <string name="customLabelPickerTitle">Custom label name</string>
+    <!-- Dialog title when you select a label when creating or edit a contact -->
+    <string name="selectLabel">Select label</string>
     
 </resources>
