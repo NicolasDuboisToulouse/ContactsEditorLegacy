@@ -16,7 +16,7 @@
 
 package com.android.contacts.ui;
 
-import com.android.contacts.R;
+import com.snoopy.contacts.editor.R;
 import com.android.contacts.model.ContactsSource;
 import com.android.contacts.model.Editor;
 import com.android.contacts.model.EntityDelta;
@@ -166,7 +166,7 @@ public final class EditContactActivity extends Activity
         final Intent intent = getIntent();
         final String action = intent.getAction();
 
-        setContentView(R.layout.act_edit);
+        setContentView(R.layout.android_contact_act_edit);
 
         // Build editor and listen for photo requests
         mContent = (LinearLayout) findViewById(R.id.editors);
@@ -436,11 +436,11 @@ public final class EditContactActivity extends Activity
 
             BaseContactEditorView editor;
             if (!source.readOnly) {
-                editor = (BaseContactEditorView) inflater.inflate(R.layout.item_contact_editor,
+                editor = (BaseContactEditorView) inflater.inflate(R.layout.android_contact_item_contact_editor,
                         mContent, false);
             } else {
                 editor = (BaseContactEditorView) inflater.inflate(
-                        R.layout.item_read_only_contact_editor, mContent, false);
+                        R.layout.android_contact_item_read_only_contact_editor, mContent, false);
             }
             PhotoEditorView photoEditor = editor.getPhotoEditor();
             photoEditor.setEditorListener(new PhotoListener(rawContactId, source.readOnly,
@@ -558,14 +558,11 @@ public final class EditContactActivity extends Activity
 
     /** {@inheritDoc} */
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_done:
-                doSaveAction(SAVE_MODE_DEFAULT);
-                break;
-            case R.id.btn_discard:
-                doRevertAction();
-                break;
-        }
+    	if (view.getId() == R.id.btn_done) {
+    		doSaveAction(SAVE_MODE_DEFAULT);
+    	} else if (view.getId() == R.id.btn_discard) {
+    		doRevertAction();
+    	}
     }
 
     /** {@inheritDoc} */
@@ -639,20 +636,20 @@ public final class EditContactActivity extends Activity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_done:
-                return doSaveAction(SAVE_MODE_DEFAULT);
-            case R.id.menu_discard:
-                return doRevertAction();
-            case R.id.menu_add:
-                return doAddAction();
-            case R.id.menu_delete:
-                return doDeleteAction();
-            case R.id.menu_split:
-                return doSplitContactAction();
-            case R.id.menu_join:
-                return doJoinContactAction();
-        }
+        int itemId = item.getItemId();
+		if (itemId == R.id.menu_done) {
+			return doSaveAction(SAVE_MODE_DEFAULT);
+		} else if (itemId == R.id.menu_discard) {
+			return doRevertAction();
+		} else if (itemId == R.id.menu_add) {
+			return doAddAction();
+		} else if (itemId == R.id.menu_delete) {
+			return doDeleteAction();
+		} else if (itemId == R.id.menu_split) {
+			return doSplitContactAction();
+		} else if (itemId == R.id.menu_join) {
+			return doJoinContactAction();
+		}
         return false;
     }
 
