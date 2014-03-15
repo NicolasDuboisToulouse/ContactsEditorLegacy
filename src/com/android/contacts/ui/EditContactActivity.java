@@ -16,8 +16,6 @@
 
 package com.android.contacts.ui;
 
-import com.android.contacts.ContactsListActivity;
-import com.android.contacts.ContactsSearchManager;
 import com.android.contacts.ContactsUtils;
 import com.android.contacts.R;
 import com.android.contacts.model.ContactsSource;
@@ -145,6 +143,11 @@ public final class EditContactActivity extends Activity
 
 	private static final String RawContacts_NAME_VERIFIED = "name_verified"; //Hidden field from RawContacts
 
+	// Fields copied from ContactsListActivity
+	private static final String ContactsListActivity_JOIN_AGGREGATE = "com.android.contacts.action.JOIN_AGGREGATE";
+	private static final String ContactsListActivity_EXTRA_AGGREGATE_ID = "com.android.contacts.action.AGGREGATE_ID";
+
+	
     private int mStatus;
     private boolean mActivityActive;  // true after onCreate/onResume, false at onPause
 
@@ -873,8 +876,8 @@ public final class EditContactActivity extends Activity
         }
 
         mContactIdForJoin = ContentUris.parseId(contactLookupUri);
-        Intent intent = new Intent(ContactsListActivity.JOIN_AGGREGATE);
-        intent.putExtra(ContactsListActivity.EXTRA_AGGREGATE_ID, mContactIdForJoin);
+        Intent intent = new Intent(ContactsListActivity_JOIN_AGGREGATE);
+        intent.putExtra(ContactsListActivity_EXTRA_AGGREGATE_ID, mContactIdForJoin);
         startActivityForResult(intent, REQUEST_JOIN_CONTACT);
     }
 
@@ -1427,7 +1430,7 @@ public final class EditContactActivity extends Activity
         if (globalSearch) {
             super.startSearch(initialQuery, selectInitialQuery, appSearchData, globalSearch);
         } else {
-            ContactsSearchManager.startSearch(this, initialQuery);
-        }
+        	Toast.makeText(getApplicationContext(), "[EDITOR BACKPORT] Unsuported search", Toast.LENGTH_LONG).show();
+          }
     }
 }
