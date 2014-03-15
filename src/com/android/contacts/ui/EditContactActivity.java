@@ -143,6 +143,8 @@ public final class EditContactActivity extends Activity
     private static final int STATUS_EDITING = 1;
     private static final int STATUS_SAVING = 2;
 
+	private static final String RawContacts_NAME_VERIFIED = "name_verified"; //Hidden field from RawContacts
+
     private int mStatus;
     private boolean mActivityActive;  // true after onCreate/onResume, false at onPause
 
@@ -880,7 +882,7 @@ public final class EditContactActivity extends Activity
         String[] PROJECTION = {
                 RawContacts._ID,
                 RawContacts.CONTACT_ID,
-                RawContacts.NAME_VERIFIED,
+                RawContacts_NAME_VERIFIED,
         };
 
         String SELECTION = RawContacts.CONTACT_ID + "=? OR " + RawContacts.CONTACT_ID + "=?";
@@ -936,7 +938,7 @@ public final class EditContactActivity extends Activity
         // display name does not change as a result of the join
         Builder builder = ContentProviderOperation.newUpdate(
                     ContentUris.withAppendedId(RawContacts.CONTENT_URI, verifiedNameRawContactId));
-        builder.withValue(RawContacts.NAME_VERIFIED, 1);
+        builder.withValue(RawContacts_NAME_VERIFIED, 1);
         operations.add(builder.build());
 
         // Apply all aggregation exceptions as one batch
