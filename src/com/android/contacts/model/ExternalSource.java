@@ -16,6 +16,8 @@
 
 package com.android.contacts.model;
 
+import com.snoopy.contacts.editor.R;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -144,25 +146,25 @@ public class ExternalSource extends FallbackSource {
                 }
 
                 final TypedArray a = context.obtainStyledAttributes(attrs,
-                        android.R.styleable.ContactsDataKind);
+                        R.styleable.ContactsDataKind);
                 final DataKind kind = new DataKind();
 
                 kind.mimeType = a
-                        .getString(com.android.internal.R.styleable.ContactsDataKind_mimeType);
+                        .getString(R.styleable.ContactsDataKind_mimeType);
                 kind.iconRes = a.getResourceId(
-                        com.android.internal.R.styleable.ContactsDataKind_icon, -1);
+                        R.styleable.ContactsDataKind_icon, -1);
 
                 final String summaryColumn = a
-                        .getString(com.android.internal.R.styleable.ContactsDataKind_summaryColumn);
+                        .getString(R.styleable.ContactsDataKind_summaryColumn);
                 if (summaryColumn != null) {
                     // Inflate a specific column as summary when requested
                     kind.actionHeader = new FallbackSource.SimpleInflater(summaryColumn);
                 }
 
                 final String detailColumn = a
-                        .getString(com.android.internal.R.styleable.ContactsDataKind_detailColumn);
+                        .getString(R.styleable.ContactsDataKind_detailColumn);
                 final boolean detailSocialSummary = a.getBoolean(
-                        com.android.internal.R.styleable.ContactsDataKind_detailSocialSummary,
+                        R.styleable.ContactsDataKind_detailSocialSummary,
                         false);
 
                 if (detailSocialSummary) {

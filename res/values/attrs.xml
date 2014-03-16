@@ -1,0 +1,16 @@
+<resources>
+       
+    <!-- Maps a specific contact data MIME-type to styling information. -->
+    <declare-styleable name="ContactsDataKind">
+        <!-- Mime-type handled by this mapping. -->
+        <attr name="mimeType" format="string" />
+        <!-- Icon used to represent data of this kind. -->
+        <attr name="icon" format="reference" />
+        <!-- Column in data table that summarizes this data. -->
+        <attr name="summaryColumn" format="string" />
+        <!-- Column in data table that contains details for this data. -->
+        <attr name="detailColumn" format="string" />
+        <!-- Flag indicating that detail should be built from SocialProvider. -->
+        <attr name="detailSocialSummary" format="boolean" />
+    </declare-styleable>
+</resources>
