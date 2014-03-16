@@ -16,7 +16,7 @@
 
 package com.android.contacts.ui.widget;
 
-import com.android.contacts.R;
+import com.snoopy.contacts.editor.R;
 import com.android.contacts.model.ContactsSource;
 import com.android.contacts.model.EntityDelta;
 import com.android.contacts.model.EntityModifier;
@@ -124,8 +124,8 @@ public class ContactEditorView extends BaseContactEditorView implements OnClickL
         mSecondaryHeader.setOnClickListener(this);
 
         final Resources res = getResources();
-        mSecondaryOpen = res.getDrawable(com.android.internal.R.drawable.expander_ic_maximized);
-        mSecondaryClosed = res.getDrawable(com.android.internal.R.drawable.expander_ic_minimized);
+        mSecondaryOpen = res.getDrawable(R.drawable.expander_ic_maximized);
+        mSecondaryClosed = res.getDrawable(R.drawable.expander_ic_minimized);
 
         this.setSecondaryVisible(false);
     }
@@ -181,16 +181,16 @@ public class ContactEditorView extends BaseContactEditorView implements OnClickL
         // Fill in the header info
         ValuesDelta values = state.getValues();
         String accountName = values.getAsString(RawContacts.ACCOUNT_NAME);
-        CharSequence accountType = source.getDisplayLabel(mContext);
+        CharSequence accountType = source.getDisplayLabel(getContext());
         if (TextUtils.isEmpty(accountType)) {
-            accountType = mContext.getString(R.string.account_phone);
+            accountType = getContext().getString(R.string.account_phone);
         }
         if (!TextUtils.isEmpty(accountName)) {
             mHeaderAccountName.setText(
-                    mContext.getString(R.string.from_account_format, accountName));
+                    getContext().getString(R.string.from_account_format, accountName));
         }
-        mHeaderAccountType.setText(mContext.getString(R.string.account_type_format, accountType));
-        mHeaderIcon.setImageDrawable(source.getDisplayIcon(mContext));
+        mHeaderAccountType.setText(getContext().getString(R.string.account_type_format, accountType));
+        mHeaderIcon.setImageDrawable(source.getDisplayIcon(getContext()));
 
         mRawContactId = values.getAsLong(RawContacts._ID);
 
@@ -206,7 +206,7 @@ public class ContactEditorView extends BaseContactEditorView implements OnClickL
             mGeneral.setVisibility(View.GONE);
             mName.setVisibility(View.GONE);
             mReadOnly.setVisibility(View.VISIBLE);
-            mReadOnly.setText(mContext.getString(R.string.contact_read_only, accountType));
+            mReadOnly.setText(getContext().getString(R.string.contact_read_only, accountType));
             mReadOnlyName.setVisibility(View.VISIBLE);
         } else {
             mGeneral.setVisibility(View.VISIBLE);

@@ -16,7 +16,7 @@
 
 package com.android.contacts.ui.widget;
 
-import com.android.contacts.R;
+import com.snoopy.contacts.editor.R;
 import com.android.contacts.model.ContactsSource;
 import com.android.contacts.model.EntityDelta;
 import com.android.contacts.model.EntityModifier;
@@ -115,16 +115,16 @@ class ReadOnlyContactEditorView extends BaseContactEditorView {
         // Fill in the header info
         ValuesDelta values = state.getValues();
         String accountName = values.getAsString(RawContacts.ACCOUNT_NAME);
-        CharSequence accountType = source.getDisplayLabel(mContext);
+        CharSequence accountType = source.getDisplayLabel(getContext());
         if (TextUtils.isEmpty(accountType)) {
-            accountType = mContext.getString(R.string.account_phone);
+            accountType = getContext().getString(R.string.account_phone);
         }
         if (!TextUtils.isEmpty(accountName)) {
             mHeaderAccountName.setText(
-                    mContext.getString(R.string.from_account_format, accountName));
+                    getContext().getString(R.string.from_account_format, accountName));
         }
-        mHeaderAccountType.setText(mContext.getString(R.string.account_type_format, accountType));
-        mHeaderIcon.setImageDrawable(source.getDisplayIcon(mContext));
+        mHeaderAccountType.setText(getContext().getString(R.string.account_type_format, accountType));
+        mHeaderIcon.setImageDrawable(source.getDisplayIcon(getContext()));
 
         mRawContactId = values.getAsLong(RawContacts._ID);
 
@@ -151,7 +151,7 @@ class ReadOnlyContactEditorView extends BaseContactEditorView {
         mName.setText(primary.getAsString(StructuredName.DISPLAY_NAME));
 
         // Read only warning
-        mReadOnlyWarning.setText(mContext.getString(R.string.contact_read_only, accountType));
+        mReadOnlyWarning.setText(getContext().getString(R.string.contact_read_only, accountType));
 
         // Phones
         ArrayList<ValuesDelta> phones = state.getMimeEntries(Phone.CONTENT_ITEM_TYPE);
@@ -161,7 +161,7 @@ class ReadOnlyContactEditorView extends BaseContactEditorView {
                         R.layout.item_read_only_field, mGeneral, false);
                 TextView v;
                 v = (TextView) field.findViewById(R.id.label);
-                v.setText(mContext.getText(R.string.phoneLabelsGroup));
+                v.setText(getContext().getText(R.string.phoneLabelsGroup));
                 v = (TextView) field.findViewById(R.id.data);
                 v.setText(PhoneNumberUtils.formatNumber(phone.getAsString(Phone.NUMBER)));
                 mGeneral.addView(field);
@@ -176,7 +176,7 @@ class ReadOnlyContactEditorView extends BaseContactEditorView {
                         R.layout.item_read_only_field, mGeneral, false);
                 TextView v;
                 v = (TextView) field.findViewById(R.id.label);
-                v.setText(mContext.getText(R.string.emailLabelsGroup));
+                v.setText(getContext().getText(R.string.emailLabelsGroup));
                 v = (TextView) field.findViewById(R.id.data);
                 v.setText(email.getAsString(Email.DATA));
                 mGeneral.addView(field);
