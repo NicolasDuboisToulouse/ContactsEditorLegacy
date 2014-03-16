@@ -11,14 +11,18 @@ The editor is modified to support external accounts (Other account than Google a
 This editor is an Android library. To use it :
 
  - Add the project library to the list of dependencies of your main application
- - Add theses lines in your Manifest :
+ - Add theses lines in your Manifest file (manifest tag) :
 
 ```xml
 
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.WRITE_CONTACTS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+```
 
+ - Add theses lines in your Manifest file (application tag) :
+
+```xml
         <activity
             android:name="com.android.contacts.ui.EditContactActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
