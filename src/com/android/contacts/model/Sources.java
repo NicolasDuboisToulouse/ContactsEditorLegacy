@@ -209,7 +209,8 @@ public class Sources extends BroadcastReceiver implements OnAccountsUpdateListen
                     // TODO: use syncadapter package instead, since it provides resources
                     Log.d(TAG, "Creating external source for type=" + accountType
                             + ", packageName=" + auth.packageName);
-                    source = new ExternalSource(auth.packageName);
+                    // source = new ExternalSource(auth.packageName);
+                    source = new GoogleSource(auth.packageName);
                     source.readOnly = !sync.supportsUploading();
                 }
 
