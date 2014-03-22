@@ -1,0 +1,4 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="name_given">First name</string>
+    <string name="name_family">Last name</string>
+</resources>
